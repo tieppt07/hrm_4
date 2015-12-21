@@ -15,6 +15,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('faq', function () {
+    return view('static.faq');
+});
+
+Route::get('about', function () {
+    return view('static.about');
+});
+
 Route::group(['namespace' => 'Auth'], function() {
     Route::group(['prefix' => 'auth'], function() {
         Route::get('login', 'AuthController@getLogin');

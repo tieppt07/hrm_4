@@ -1,45 +1,12 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Laravel</title>
+@extends('master')
+@section('title', 'Welcome')
 
-        <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
-
-        <style>
-            html, body {
-                height: 100%;
-            }
-
-            body {
-                margin: 0;
-                padding: 0;
-                width: 100%;
-                display: table;
-                font-weight: 100;
-                font-family: 'Lato';
-            }
-
-            .container {
-                text-align: center;
-                display: table-cell;
-                vertical-align: middle;
-            }
-
-            .content {
-                text-align: center;
-                display: inline-block;
-            }
-
-            .title {
-                font-size: 96px;
-            }
-        </style>
-    </head>
-    <body>
+@section('content')
+    <div class="jumbotron">
         <div class="container">
-            <div class="content">
-                <div class="title">Laravel 5</div>
-            </div>
+        <h1>Hello, world!</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae dolor voluptate placeat assumenda tempora nobis, deserunt veniam aspernatur maiores eligendi iste, ipsa, ex asperiores cupiditate eos exercitationem dicta inventore. Aspernatur iure blanditiis in ducimus, dolore? Cupiditate velit debitis sequi possimus.</p>
+            <p><a class="btn btn-primary btn-lg" href="{{ url('auth/login') }}" role="button">Log in</a></p>
         </div>
-    </body>
-</html>
+    </div>
+@endsection
