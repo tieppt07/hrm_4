@@ -23,6 +23,8 @@ Route::get('about', function () {
     return view('static.about');
 });
 
+Route::resource('users', 'UsersController');
+
 Route::group(['namespace' => 'Auth'], function() {
     Route::group(['prefix' => 'auth'], function() {
         Route::get('login', 'AuthController@getLogin');
