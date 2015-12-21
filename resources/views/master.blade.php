@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Human Resource Management - @yield('title')</title>
-    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}"/>    
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}"/>  
+    <link rel="stylesheet" href="{{ elixir('css/all.css') }}">
+    <script src="{{ elixir('js/all.js') }}"></script>  
 </head>
 <body>
     <nav class="navbar navbar-default">

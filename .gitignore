@@ -7,4 +7,6 @@
 /public/js
 /public/fonts
 /.idea
+/public/build
+/node_modules
 
