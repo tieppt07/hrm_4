@@ -70,4 +70,23 @@ abstract class Repository implements RepositoryInterface
     {
         return $this->model->paginate($perPage, $columns);
     }
+
+    /**
+     * @param $attribute
+     * @param $value
+     * @param array $columns
+     * @return mixed
+     */
+    public function where($attribute, $value, $columns = ['*']) {
+        return $this->model->where($attribute, '=', $value);
+    }
+
+    /**
+     * @param $id
+     * @param array $columns
+     * @return mixed
+     */
+    public function find($id, $columns = ['*']) {
+        return $this->model->find($id, $columns);
+    }
 }

@@ -9,4 +9,4 @@
 /.idea
 /public/build
 /node_modules
-
+/storage/debugbar

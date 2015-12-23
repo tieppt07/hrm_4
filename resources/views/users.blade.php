@@ -3,12 +3,16 @@
 @section('content')
     <div class="row">
         <div class="col-sm-12 col-md-12 main">
-            {!! Form::open(['id' => 'form-filter', 'method' => 'GET', 'action' => 'UsersController@index']) !!}
+            {!! Form::open(['id' => 'form-filter', 'method' => 'GET']) !!}
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="department" class="control-label">Department</label>
-                            {!! Form::select('department', $departments, null, ['class' => 'form-control']) !!}
+                            @if (isset($departmentId))
+                                {!! Form::select('department', $departments, $departmentId, ['class' => 'form-control']) !!}
+                            @else
+                                {!! Form::select('department', $departments, null, ['class' => 'form-control']) !!}
+                            @endif
                         </div>
                         {!! Form::submit('Filter', ['class' => 'btn btn-primary']) !!}
                     </div>
