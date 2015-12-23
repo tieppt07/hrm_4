@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
@@ -37,6 +37,22 @@ class User extends Model implements AuthenticatableContract,
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
+
+    const IS_ADMIN = 1;
+    const IS_WORKING = 1;
+
+    public function isAdmin() 
+    {
+        return $this->role == self::IS_ADMIN;
+    }
+
+    public function showStatus()
+    {
+        if ($this->status == self::IS_WORKING) {
+            return 'STILL WORKING';
+        } 
+        return 'LEFT COMPANY';
+    }
 
     public function position()
     {
