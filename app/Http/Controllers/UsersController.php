@@ -10,7 +10,7 @@ use App\Repositories\UserRepository;
 use App\Repositories\DepartmentRepository;
 use App\Repositories\PositionRepository;
 
-class HomeController extends Controller
+class UsersController extends Controller
 {
     protected $userRepository;
     protected $departmentRepository;
@@ -33,13 +33,18 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $departments = $this->departmentRepository->listsDepartments();
         $positions = $this->positionRepository->listsPositions();
+        if ($request->get('department')) {
+            $users = $this->userRepository->where('department_id', $request->get('department'))->paginate();
+            $users->load(['department', 'position']);
+            $departmentId = $request->get('department');
+            return view('users', ['users' => $users, 'departments' => $departments, 'positions' => $positions, 'departmentId' => $departmentId]);
+        }
         $users = $this->userRepository->paginate();
         $users->load(['department', 'position']);
-        $users->setPath('users');
-        return view('home', ['users' => $users, 'departments' => $departments, 'positions' => $positions]);
+        return view('users', ['users' => $users, 'departments' => $departments, 'positions' => $positions]);
     }
 }
