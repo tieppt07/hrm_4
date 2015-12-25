@@ -7,18 +7,20 @@
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="department" class="control-label">Department</label>
                             @if (isset($departmentId))
                                 {!! Form::select('department', $departments, $departmentId, ['class' => 'form-control']) !!}
                             @else
                                 {!! Form::select('department', $departments, null, ['class' => 'form-control']) !!}
                             @endif
                         </div>
-                        {!! Form::submit('Filter', ['class' => 'btn btn-primary']) !!}
                     </div>
+                    {!! Form::submit('Filter', ['class' => 'btn btn-primary']) !!}
                 </div>
             {!! Form::close() !!}
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addModal">New Staff</button>
+            @include('partial.add_user')
             <div class="table-responsive">
+                @include('partial.showing_error')
                 <table class="table table-striped">
                     <thead>
                         <tr>

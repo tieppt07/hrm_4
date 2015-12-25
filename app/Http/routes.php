@@ -24,7 +24,11 @@ Route::get('about', function () {
 });
 
 Route::get('home', 'HomeController@index');
-Route::resource('users', 'UsersController');
+Route::resource('users', 'UsersController', ['only' => 'index']);
+
+Route::group(['middleware' => 'admin'], function() {
+    Route::resource('users', 'UsersController', ['except' => 'index']);
+});
 
 Route::group(['namespace' => 'Auth'], function() {
     Route::group(['prefix' => 'auth'], function() {
