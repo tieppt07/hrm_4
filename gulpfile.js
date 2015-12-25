@@ -14,13 +14,17 @@ var elixir = require('laravel-elixir');
 elixir(function(mix) {
     mix.sass('app.scss');
     mix.browserify('app.js');
+    mix.browserify('jquery-ias.min.js');
+    mix.browserify('ajax-paginate.js');
 
     mix.styles([
         'app.css'
     ], null, 'public/css');
 
     mix.scripts([
-        'app.js'
+        'app.js',
+        'jquery-ias.min.js',
+        'ajax-paginate.js'
     ], null, 'public/js');
 
     mix.version([
