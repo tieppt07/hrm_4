@@ -24,11 +24,16 @@ Route::get('about', function () {
 });
 
 Route::get('home', 'HomeController@index');
-Route::resource('users', 'UsersController', ['only' => 'index']);
-Route::resource('positions', 'PositionsController', ['only' => 'index']);
+
+Route::group(['middleware' => 'auth'], function() {
+    Route::resource('users', 'UsersController', ['only' => 'index']);
+    Route::resource('positions', 'PositionsController', ['only' => 'index']);
+    Route::resource('departments', 'DepartmentsController', ['only' => 'index']);
+});
 
 Route::group(['middleware' => 'admin'], function() {
     Route::resource('users', 'UsersController', ['except' => 'index']);
+    Route::resource('departments', 'DepartmentsController', ['except' => 'index']);
     Route::resource('positions', 'PositionsController', ['except' => 'index']);
 });
 

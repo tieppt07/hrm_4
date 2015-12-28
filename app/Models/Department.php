@@ -20,6 +20,14 @@ class Department extends Model
      */
     protected $fillable = ['name', 'description'];
 
+    public static function boot()
+    {
+        parent::boot();
+        Department::deleting(function ($department) {
+            $department->users()->update(['department_id' => null]);
+        });
+    }
+
     public function users()
     {
     	return $this->hasMany(User::class);
