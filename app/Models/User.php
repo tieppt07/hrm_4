@@ -46,6 +46,11 @@ class User extends Model implements AuthenticatableContract,
         return $this->role == self::IS_ADMIN;
     }
 
+    public function setPasswordAttribute($value)
+    {
+        return $this->attributes['password'] = bcrypt($value);
+    }
+
     public function showStatus()
     {
         if ($this->status == self::IS_WORKING) {

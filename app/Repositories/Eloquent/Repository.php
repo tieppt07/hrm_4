@@ -89,4 +89,30 @@ abstract class Repository implements RepositoryInterface
     public function find($id, $columns = ['*']) {
         return $this->model->find($id, $columns);
     }
+
+    /**
+     * @param array $data
+     * @return mixed
+     */
+    public function create(array $data) {
+        return $this->model->create($data);
+    }
+
+    /**
+     * @param array $data
+     * @param $id
+     * @param string $attribute
+     * @return mixed
+     */
+    public function update(array $data, $id, $attribute="id") {
+        return $this->model->where($attribute, '=', $id)->update($data);
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function delete($id) {
+        return $this->model->destroy($id);
+    }
 }
