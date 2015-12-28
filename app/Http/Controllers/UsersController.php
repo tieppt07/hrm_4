@@ -39,7 +39,7 @@ class UsersController extends Controller
         $departments = $this->departmentRepository->listsDepartments();
         $positions = $this->positionRepository->listsPositions();
         if ($request->get('department')) {
-            $users = $this->userRepository->where('department_id', $request->get('department'))->paginate();
+            $users = $this->userRepository->findByField('department_id', $request->get('department'))->paginate();
             $users->load(['department', 'position']);
             $departmentId = $request->get('department');
             return view('users', ['users' => $users, 'departments' => $departments, 'positions' => $positions, 'departmentId' => $departmentId]);
