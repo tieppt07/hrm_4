@@ -55,7 +55,7 @@ class User extends Model implements AuthenticatableContract,
     {
         if ($this->status == self::IS_WORKING) {
             return 'STILL WORKING';
-        } 
+        }
         return 'LEFT COMPANY';
     }
 
