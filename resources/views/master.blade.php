@@ -25,6 +25,11 @@
 
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
+                    @if (Auth::user())
+                        <li><a href="{{ url('users') }}">Staffs</a></li>
+                        <li><a href="{{ url('departments') }}">Departments</a></li>
+                        <li><a href="{{ url('positions') }}">Positions</a></li>
+                    @endif
                     <li><a href="{{ url('faq') }}">FAQ</a></li>
                     <li><a href="{{ url('about') }}">About</a></li>
                 </ul>

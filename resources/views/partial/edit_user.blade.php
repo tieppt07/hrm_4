@@ -6,7 +6,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalLabel">Edit user</h4>
             </div>
-            {!! Form::open(['method' => 'PATCH', 'url' => 'users/'.$user->id]) !!}
+            {!! Form::open(['method' => 'PATCH', 'url' => "users/{$user->id}"]) !!}
                 <div class="modal-body">
                     <div class="row">
                         <div class="form-group col-xs-12 col-sm-6">

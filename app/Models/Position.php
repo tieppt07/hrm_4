@@ -20,6 +20,14 @@ class Position extends Model
      */
     protected $fillable = ['name', 'description'];
 
+    public static function boot()
+    {
+        parent::boot();
+        Position::deleting(function ($position) {
+            $position->users()->update(['position_id' => null]);
+        });
+    }
+
     public function users()
     {
     	return $this->hasMany(User::class);
