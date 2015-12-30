@@ -45,8 +45,8 @@
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->birthday }}</td>
-                                <td>{{ $user->department->name }}</td>
-                                <td>{{ $user->position->name }}</td>
+                                <td>{{ $user->department->name or 'Not Defined' }}</td>
+                                <td>{{ $user->position->name or 'Not Defined' }}</td>
                                 <td>{{ $user->phone }}</td>
                                 <td>{{ $user->showStatus() }}</td>
                                 @if (Auth::user()->isAdmin())

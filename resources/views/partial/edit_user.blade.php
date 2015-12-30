@@ -19,11 +19,19 @@
                         </div>
                         <div class="form-group col-xs-12 col-sm-6">
                             {!! Form::label('department', 'Department:', ['class' => 'control-label']) !!}
-                            {!! Form::select('department_id', $departments, $user->department->id, ['class' => 'form-control']) !!}
+                            @if (isset($user->department_id))
+                                {!! Form::select('department_id', $departments, $user->department_id, ['class' => 'form-control']) !!}
+                            @else
+                                {!! Form::select('department_id', $departments, null, ['class' => 'form-control']) !!}
+                            @endif
                         </div>
                         <div class="form-group col-xs-12 col-sm-6">
                             {!! Form::label('position', 'Position:', ['class' => 'control-label']) !!}
-                            {!! Form::select('position_id', $positions, $user->position->id, ['class' => 'form-control']) !!}
+                            @if (isset($user->position_id))
+                                {!! Form::select('position_id', $positions, $user->position_id, ['class' => 'form-control']) !!}
+                            @else
+                                {!! Form::select('position_id', $positions, null, ['class' => 'form-control']) !!}
+                            @endif
                         </div>
                         <div class="form-group col-xs-12 col-sm-6">
                             {!! Form::label('phone', 'Phone:', ['class' => 'control-lable']) !!}
