@@ -16,4 +16,15 @@ class UserRepository extends Repository
     {
         return User::class;
     }
+
+    public function searchStaff($key)
+    {
+        $users = User::where('name', 'like', "%$key%")
+                        ->orWhere('email', 'like', "%$key%")
+                        ->orWhere('phone', 'like', "%$key%")
+                        ->orderBy('name')
+                        ->paginate();
+        $users->load(['department', 'position']);
+        return $users;
+    }
 }

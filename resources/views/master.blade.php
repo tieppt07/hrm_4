@@ -39,12 +39,11 @@
                         <li><a href="{{ url('auth/register') }}">Register</a></li>
                     @else
                         <li>
-                            {!! Form::open(['class' => 'navbar-form navbar-left']) !!}
+                            {!! Form::open(['method' => 'GET', 'url' => 'search', 'class' => 'navbar-form navbar-left']) !!}
                                 <div class="form-group">
-                                    {!! Form::text('key', null, ['class' => 'form-control', 'placeholder' => 'Enter name or email']) !!}
+                                    {!! Form::text('key', null, ['class' => 'form-control', 'placeholder' => 'Enter name or email or phone']) !!}
                                     <button class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
                                 </div>
-
                             {!! Form::close() !!}
                         </li>
                         <li class="dropdown">
