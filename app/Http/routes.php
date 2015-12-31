@@ -29,6 +29,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::resource('users', 'UsersController', ['only' => 'index']);
     Route::resource('positions', 'PositionsController', ['only' => 'index']);
     Route::resource('departments', 'DepartmentsController', ['only' => 'index']);
+    Route::get('search', 'SearchController@index');
 });
 
 Route::group(['middleware' => 'admin'], function() {
