@@ -17,13 +17,19 @@ class UserRepository extends Repository
         return User::class;
     }
 
-    public function searchStaff($key)
+    public function searchStaff($key, $departmentId, $positionId)
     {
-        $users = User::where('name', 'like', "%$key%")
-                        ->orWhere('email', 'like', "%$key%")
-                        ->orWhere('phone', 'like', "%$key%")
-                        ->orderBy('name')
-                        ->paginate();
+        $users = User::where(function ($query) use ($key) {
+                            $query->where('name', 'like', "%$key%")
+                                 ->orWhere('email', 'like', "%$key%")
+                                 ->orWhere('phone', 'like', "%$key%");
+                       })
+                     ->where(function ($query) use ($departmentId, $positionId) {
+                            $query->where('department_id', '=', $departmentId)
+                                  ->where('position_id', '=', $positionId);
+                       })
+                     ->orderBy('name')
+                     ->paginate();
         $users->load(['department', 'position']);
         return $users;
     }
