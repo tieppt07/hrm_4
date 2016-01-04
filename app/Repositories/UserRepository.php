@@ -27,4 +27,25 @@ class UserRepository extends Repository
         $users->load(['department', 'position']);
         return $users;
     }
+
+    public function advancedSearch($key, $departmentsId, $positionsId)
+    {
+        $users = User::where(function ($query) use ($key) {
+                                $query->where('name', 'like', "%$key%")
+                                      ->orWhere('email', 'like', "%$key%")
+                                      ->orWhere('phone', 'like', "%$key%");
+                            })
+                     ->where(function ($query) use ($departmentsId, $positionsId) {
+                                 if ($departmentsId) {
+                                     $query->whereIn('department_id', $departmentsId);
+                                 }
+                                 if ($positionsId) {
+                                     $query->whereIn('position_id', $positionsId);
+                                 }
+                            })
+                     ->orderBy('name')
+                     ->paginate();
+        $users->load(['department', 'position']);
+        return $users;
+    }
 }
