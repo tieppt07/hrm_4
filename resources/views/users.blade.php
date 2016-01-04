@@ -21,7 +21,7 @@
             @include('partial.add_user')
             <div class="table-responsive">
                 @include('partial.showing_error')
-                <table class="table table-striped">
+                <table class="table">
                     <thead>
                         <tr>
                             <th>#</th>
@@ -40,7 +40,7 @@
                     </thead>
                     <tbody>
                         @foreach ($users as $user)
-                            <tr>
+                            <tr {{ $user->getClassStatus() }}>
                                 <td>{{ $user->id }}</td>
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>

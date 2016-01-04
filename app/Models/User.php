@@ -51,10 +51,18 @@ class User extends Model implements AuthenticatableContract,
         return $this->attributes['password'] = bcrypt($value);
     }
 
+    public function getClassStatus()
+    {
+        if ($this->status == self::IS_WORKING) {
+            return null;
+        }
+        return 'class=danger';
+    }
+
     public function showStatus()
     {
         if ($this->status == self::IS_WORKING) {
-            return 'STILL WORKING';
+            return 'WORKING';
         }
         return 'LEFT COMPANY';
     }
