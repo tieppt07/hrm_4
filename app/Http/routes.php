@@ -12,7 +12,14 @@
 */
 
 Route::get('/', function () {
+    if (Auth::user()) {
+        return redirect('users');
+    }
     return view('welcome');
+});
+
+Route::get('home', function() {
+    return redirect('users');
 });
 
 Route::get('faq', function () {
@@ -22,8 +29,6 @@ Route::get('faq', function () {
 Route::get('about', function () {
     return view('static.about');
 });
-
-Route::get('home', 'HomeController@index');
 
 Route::group(['middleware' => 'auth'], function() {
     Route::resource('users', 'UsersController', ['only' => 'index']);
