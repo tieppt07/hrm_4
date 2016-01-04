@@ -17,6 +17,10 @@
                             <th>Position</th>
                             <th>Phone</th>
                             <th>Status</th>
+                            @if (Auth::user()->isAdmin())
+                                <th>Edit</th>
+                                <th>Delete</th>
+                            @endif
                         </tr>
                         </thead>
                         <tbody>
@@ -30,6 +34,17 @@
                                     <td>{{ $user->position->name or 'Not Defined' }}</td>
                                     <td>{{ $user->phone }}</td>
                                     <td>{{ $user->showStatus() }}</td>
+                                    @if (Auth::user()->isAdmin())
+                                        <td>
+                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal{{$user->id}}">Edit</button>
+                                            @include('partial.edit_user')
+                                        </td>
+                                        <td>
+                                            {!! Form::open(['route' => ['users.destroy', $user->id], 'method' => 'delete']) !!}
+                                            {!! Form::submit('Delete', ['onclick' => 'return confirm("Are you sure to delete?")', 'class' => 'btn btn-danger']) !!}
+                                            {!! Form::close() !!}
+                                        </td>
+                                    @endif
                                 </tr>
                             @endforeach
                         </tbody>

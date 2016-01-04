@@ -36,17 +36,19 @@ class SearchController extends Controller
     public function index(Request $request)
     {
         if ($request->has('key')) {
-            $departments = $this->departmentRepository->all(['name', 'id']);
-            $positions = $this->positionRepository->all(['name', 'id']);
+            $departmentsList = $this->departmentRepository->all(['name', 'id']);
+            $positionsList = $this->positionRepository->all(['name', 'id']);
+            $positions = $this->positionRepository->listsPositions();
+            $departments = $this->departmentRepository->listsDepartments();
             $key = $request->get('key');
             if ($request->has('department') || $request->has('position')) {
                 $departmentsId = $request->get('department');
                 $positionsId = $request->get('position');
                 $users = $this->userRepository->advancedSearch($key, $departmentsId, $positionsId);
-                return view('search', ['users' => $users, 'key' => $key, 'positions' => $positions, 'departments' => $departments, 'departmentsId' => $departmentsId, 'positionsId' => $positionsId]);
+                return view('search', ['users' => $users, 'key' => $key, 'positions' => $positions, 'departments' => $departments, 'departmentsId' => $departmentsId, 'positionsId' => $positionsId, 'positionsList' => $positionsList, 'departmentsList' => $departmentsList]);
             }
             $users = $this->userRepository->searchStaff($key);
-            return view('search', ['users' => $users, 'key' => $key, 'positions' => $positions, 'departments' => $departments]);
+            return view('search', ['users' => $users, 'key' => $key, 'positions' => $positions, 'departments' => $departments, 'positionsList' => $positionsList, 'departmentsList' => $departmentsList]);
         }
         return redirect('users');
     }

@@ -11,7 +11,7 @@
             <div class="col-xs-12">
                 <div class="form-group">
                     {!! Form::label('department', 'Department:', ['class' => 'control-label']) !!}
-                    @foreach($departments as $department)
+                    @foreach($departmentsList as $department)
                         <div class="radio-inline">
                             <label>
                                 {!! Form::checkbox("department[]", $department->id) !!} {{ $department->name }}
@@ -23,7 +23,7 @@
             <div class="col-xs-12">
                 <div class="form-group">
                     {!! Form::label('position', 'Position:', ['class' => 'control-label']) !!}
-                    @foreach($positions as $position)
+                    @foreach($positionsList as $position)
                         <div class="radio-inline">
                             <label>
                                 {!! Form::checkbox("position[]", $position->id) !!} {{ $position->name }}
