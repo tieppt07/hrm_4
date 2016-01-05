@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Repositories\PositionRepository;
 use App\Repositories\UserRepository;
 use App\Models\User;
+use Validator;
 
 class PositionsController extends Controller
 {
@@ -47,8 +48,15 @@ class PositionsController extends Controller
      */
     public function store(Request $request)
     {
-        $position = $this->positionRepository->create($request->all());
-        return redirect('positions');
+        $valid = Validator::make($request->all(), [
+            'name' => 'required|max:255|unique:positions',
+        ]);
+        if ($valid->fails()) {
+            return back()->withErrors($valid->errors());
+        } else {
+            $position = $this->positionRepository->create($request->all());
+            return redirect('positions');
+        } 
     }
 
     /**
@@ -60,8 +68,15 @@ class PositionsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $position = $this->positionRepository->update($request->except(['_method', '_token']), $id);
-        return redirect('positions');
+        $valid = Validator::make($request->all(), [
+            'name' => 'required|max:255|unique:positions,name,' . $id,
+        ]);
+        if ($valid->fails()) {
+            return back()->withErrors($valid->errors());
+        } else {
+            $position = $this->positionRepository->update($request->except(['_method', '_token']), $id);
+            return redirect('positions');
+        }   
     }
 
     /**

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Repositories\DepartmentRepository;
+use Validator;
 
 class DepartmentsController extends Controller
 {
@@ -41,8 +42,15 @@ class DepartmentsController extends Controller
      */
     public function store(Request $request)
     {
-        $department = $this->departmentRepository->create($request->all());
-        return redirect('departments');
+        $valid = Validator::make($request->all(), [
+            'name' => 'required|max:255|unique:departments',
+        ]);
+        if ($valid->fails()) {
+            return back()->withErrors($valid->errors());
+        } else {
+            $department = $this->departmentRepository->create($request->all());
+            return redirect('departments');
+        }
     }
 
     /**
@@ -54,8 +62,15 @@ class DepartmentsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $department = $this->departmentRepository->update($request->except(['_method', '_token']), $id);
-        return redirect('departments');
+        $valid = Validator::make($request->all(), [
+            'name' => 'required|max:255|unique:departments,name,' . $id,
+        ]);
+        if ($valid->fails()) {
+            return back()->withErrors($valid->errors());
+        } else {
+            $department = $this->departmentRepository->update($request->except(['_method', '_token']), $id);
+            return redirect('departments');
+        }
     }
 
     /**
