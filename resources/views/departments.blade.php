@@ -3,9 +3,10 @@
 @section('content')
     <div class="row">
         <div class="col-sm-12 col-md-12 main">
-            <div class="table-responsive">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal">Create</button>
-                @include('partial.add_department')
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal">Create</button>
+            @include('partial.add_department')
+            <div class="table-responsive"> 
+                @include('partial.showing_error')
                 <table class="table table-striped">
                     <thead>
                         <tr>
